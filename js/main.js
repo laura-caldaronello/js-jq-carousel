@@ -4,6 +4,7 @@ var imgs = $('.img-container > *');
 imgs.first().addClass(['first','active']);
 imgs.last().addClass('last');
 
+// predispongo le function prima generali e poi, basandomi su di esse, quelle per la tastiera
 function goToLeftGeneral() {
 
     var imgActive = $('img.active');
@@ -42,18 +43,17 @@ var goToRightKey = function(event) {
     }
 }
 
-// parte chevron e keyboard
+// applicazione function parte chevron e keyboard
 
 var cRight = $('#top .right-container');
 cRight.click(goToRightGeneral);
 $(document).keydown(goToRightKey);
 
-
 var cLeft = $('#top .left-container');
 cLeft.click(goToLeftGeneral);
 $(document).keydown(goToLeftKey);
 
-// /parte chevron e keyboard
+// /applicazione function parte chevron e keyboard
 
 // parte pallini
 
@@ -63,32 +63,16 @@ for (var i = 0; i < imgs.length; i++) {
     bottom.append(' <i class="fas fa-circle"></i>');
 }
 
-var circle = $('#bottom > *');
-console.log(circle[0]);
-console.log(imgs[0]);
-
-
-for (let i = 0; i < imgs.length; i++) {
-
-    circle[i].click( function () {
+bottom.children(':not(.active)').click( function () {
     
-        var imgActive = $('img.active');
-        imgActive.removeClass('active');
-        
-        imgs[i].addClass('active');
-        
-    });
+    bottom.children('.active').removeClass('active');
+    $(this).addClass('active');
+    var ind = $(this).index();
 
-}
+    var imgActive = $('img.active');
+    imgActive.removeClass('active');
+    document.getElementsByTagName('IMG')[ind].classList += ' active';
 
-circle[1].click( function () {
-    
-    // var imgActive = $('img.active');
-    // imgActive.removeClass('active');
-    
-    // imgs[1].addClass('active');
-    alert('ciao');
-    
 });
 
 
